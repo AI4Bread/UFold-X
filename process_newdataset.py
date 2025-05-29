@@ -32,12 +32,7 @@ def clean_pair(pair_list,seq):
             #pdb.set_trace()
             pair_list.remove(item)
     return pair_list
-#all_files = os.listdir('/data2/darren/experiment/ufold/data/bpRNAnew.nr500.canonicals/')
-#file_dir = '/data2/darren/experiment/SPOT-RNA/data/bpRNA_dataset-canonicals/TS0/'
-#file_dir = '/data2/darren/experiment/mxfold2/data/TrainSetA/' #'/data2/darren/experiment/SPOT-RNA/data/bpRNA_dataset-canonicals/TS0/'
-#file_dir = '/data2/darren/experiment/ufold/data/bpRNAnew.nr500.canonicals/'
-#file_dir = 'pdb_bpseq/'
-#file_dir = 'BPSeqFiles_PDB/'
+
 if __name__=='__main__':
 
     file_dir = sys.argv[1]+'/'#'BPSeqFiles_PDB/'
@@ -112,7 +107,7 @@ if __name__=='__main__':
             ##cut all to 1800 length
             #pdb.set_trace()
             #print index
-    
+            ######change the length here to support longer sequences######
             one_hot_matrix_1800 = np.zeros((1800,4))
             one_hot_matrix_1800[:seq_len,] = one_hot_matrix
             ss_label_1800 = np.zeros((1800,3),dtype=int)
