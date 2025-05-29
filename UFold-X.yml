@@ -1,4 +1,4 @@
-name: MUFold
+name: UFold-X
 channels:
   - defaults
 dependencies:
@@ -151,4 +151,4 @@ dependencies:
     - yapf==0.40.2
     - zipp==3.19.2
     - zstandard==0.19.0
-prefix: /root/miniconda3/envs/MUFold
+prefix: /your_own_path/miniconda3/envs/MUFold-X
