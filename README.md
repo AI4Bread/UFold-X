@@ -50,6 +50,21 @@ We recommend users use our [UFold-X webserver](http://116.211.143.53:23892/UFold
 
 ### Try UFold-X
 
+If you want to try UFold-X on your own server, please run:
+```python
+python ufold_predict.py
+```
+You can also add optional parameters **-nc True** which indicates support for predicting non-canonical pairs, and default is **False**.
+
+Make sure that the sequence you want to predict has been placed in the **input.txt file under the data folder** in the correct format, just like this:
+```
+>/Bacteria/B06883.ct
+UCCCGGUGAUUGGAGCGCUGUGGCACCACUCCUUCCCAUUCCGAACAGGAUAGUGAAAGGCAGCAGCGGGUACGAUACUUGAAUCGCAAGGAUCUGGGACAAUACCUCAUCGCCGGGU
+>./RNAStrAlign/tRNA_database/tdbD00004755.ct
+GCCCCCAUCGUCUAACGGUUAGGACACCAGACUUUCAAUCUGACAACGAGAGUUCGACUCUCUCUGGGGGUA
+```
+After running the above command, you will get the **output ct file, bpseq file, and figure** in the results folder.
+
 ### Evaluate UFold-X
 
 ### Train models based on your own datasets
