@@ -13,7 +13,7 @@ RNA secondary structure is essential for understanding the functional roles of n
 Clone the repository.
 
 ```
-
+git clone https://github.com/AI4Bread/UFold-X.git
 ```
 
 Navigate to the root of this repo and setup the conda environment.
@@ -22,7 +22,7 @@ Navigate to the root of this repo and setup the conda environment.
 
 ### 1. Please change prefix path into your own path in the last line of UFold-X.yml file.
 
-### 2. Please match your python version ,cuda version and torch version with the package.
+### 2. Please match your python version, cuda version and torch version with the package.
 
 ```
 conda env create -f UFold-X.yml
@@ -35,6 +35,7 @@ conda activate UFold-X
 ```
 
 ## Pre-trained models 
+Pre-trained models are deposited in our [drive](). Please download them and put them into models folder.
 
 ## Usage
 
