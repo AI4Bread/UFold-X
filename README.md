@@ -69,12 +69,32 @@ After running the above command, you will get the **output ct file, bpseq file, 
 
 ### Evaluate UFold-X
 
-#### Verify the performance of UFold-X on long sequences
+#### Verify the performance of UFold-X on long sequences (600-1800bp)
 Run:
 ```python
 python ufold_long_test.py
 ```
-This line of code calls the UFold-X model that has been trained on the long sequence training set. The default test set is **RNAstralign-1800** (since this test set is large, it takes about **2 hours** to complete the test)
+This line of code calls the UFold-X model that has been pre-trained on the long sequence training set. The default test set is **RNAstralign-1800** (since this test set is large, it takes about **2 hours** to complete the test)
+
+You can also add optional parameters **-nc True** which indicates support for predicting non-canonical pairs, and default is False. The predicted results will be placed in the **test_outputs folder** in the **bpseq file format**, and the command line window will present the **F1, Precision and Recall** metrics of the test results.
+
+#### Verify the performance of UFold-X on variable-length datasets (0-1800 bp)
+Run:
+```python
+python ufold_all_test.py
+```
+This line of code calls the UFold-X model that has been pre-trained on the variable-length sequence training set. The default test set is **RNAstralign-1800** (since this test set is large, it takes about **2 hours** to complete the test)
+
+Other operations are similar to the above.
+
+#### Verify the performance of UFold-X on your own datasets
+
+##### Data generator
+You can put their bpseq formatted files in their own directory and specify it in this process by running:
+```python
+python process_newdataset.py your_own_directory_containing_bpseq_files
+```
+After that you will get a pickle file format, which is compatible with our model. Then put the data into data folder
 
 ### Train models based on your own datasets
 
