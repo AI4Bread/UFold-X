@@ -279,46 +279,14 @@ def main():
     #device = torch.device(":2" if torch..is_available() else "cpu")
     seed_torch()
     
-    # for loading data
-    # loading the rna ss data, the data has been preprocessed
-    # 5s data is just a demo data, which do not have pseudoknot, will generate another data having that
-    
-    # train_data = RNASSDataGenerator('/home/yingxic4/programs/e2efold/data/{}/'.format(data_type), 'train', True)
-    # val_data = RNASSDataGenerator('/home/yingxic4/programs/e2efold/data/{}/'.format(data_type), 'val')
-    ##test_data = RNASSDataGenerator('./data/{}/'.format(data_type), 'test_no_redundant.pickle')
-    #test_data = RNASSDataGenerator('/data2/darren/experiment/ufold/data/rnastralign_all/', 'test_no_redundant.pickle')
-    #test_data = RNASSDataGenerator('/data2/darren/experiment/ufold/data/rnastralign_all/', 'test_no_redundant_600.pickle')
     print('Loading test file: ',test_file)
     if test_file == 'RNAStralign' or test_file == 'ArchiveII':
-        #test_data = RNASSDataGenerator('/data2/darren/experiment/ufold/data/rnastralign_all_600/', 'test.pickle')
-        ## test_data = RNASSDataGenerator('/data2/darren/experiment/ufold/data/', 'bpRNA_TS0_ori.cPickle')
-        ## test_data = RNASSDataGenerator('/root/autodl-tmp/UFold/data/', 'bpRNA_TS0_ori.cPickle')
-        test_data = RNASSDataGenerator('/root/autodl-tmp/UFold/data/', 'test_no_redundant_1800.pickle')
-        #test_data = RNASSDataGenerator('/root/autodl-tmp/UFold/data/', 'all_1800_archieveII.pickle')
-        #test_data = RNASSDataGenerator('/root/autodl-tmp/UFold/data/', 'val_1800.pickle')
-        #test_data = RNASSDataGenerator('/root/autodl-tmp/UFold/data/', 'test_1800.pickle')
-        
-        #test_data = RNASSDataGenerator('/data2/darren/experiment/ufold/upload_github/data/', 'ArchiveII.pickle')
+
+        test_data = RNASSDataGenerator('data/', 'test_no_redundant_1800.pickle')
+
     else:
         test_data = RNASSDataGenerator('data/',test_file+'.cPickle')
-        #test_data = RNASSDataGenerator('/root/autodl-tmp/UFold/data/', 'test_1800.pickle')
-        #test_data = RNASSDataGenerator('/root/autodl-tmp/UFold/data/', 'RCSB_test.cPickle')
-        ##test_data = RNASSDataGenerator('/root/autodl-tmp/UFold/data/', 'test_no_redundant_1800.pickle')
-        #test_data = RNASSDataGenerator('/root/autodl-tmp/UFold/data/', 'all_1800_archieveII.pickle')
-    #test_data = RNASSDataGenerator('/data2/darren/experiment/ufold/data/', 'all_1800_archieveII.pickle')
-    #test_data = RNASSDataGenerator('/data2/darren/experiment/ufold/data/', 'all_600_archieveII.pickle')
-    #test_data = RNASSDataGenerator('/data2/darren/experiment/ufold/data/', 'bpRNA12_test_generate.cPickle')
-    #test_data = RNASSDataGenerator('/data2/darren/experiment/ufold/data/', 'bpRNA12_RF00001_similarfamilys_test.cPickle')
-    #test_data = RNASSDataGenerator('/data2/darren/experiment/ufold/data/', 'bpRNA_TestSetA.cPickle')
-    #test_data = RNASSDataGenerator('/data2/darren/experiment/ufold/data/', 'bpRNA12_allfamily_generate_test.cPickle')
-    #test_data = RNASSDataGenerator('/data2/darren/experiment/ufold/data/', 'bpRNA12_38family_generate_test.cPickle')
-    ##test_data = RNASSDataGenerator('/data2/darren/experiment/ufold/data/', 'bpRNA_new_generate.cPickle')
-    #test_data = RNASSDataGenerator('/data2/darren/experiment/ufold/data/', 'bpRNA_new20201015.cPickle')
-    #test_data = RNASSDataGenerator('/data2/darren/experiment/ufold/data/', 'archieveII_contacts_pred.cPickle')
-    #test_data = RNASSDataGenerator('/data2/darren/experiment/ufold/data/', 'bpRNA_pdbnewgenerate_yingxc.cPickle')
-    #test_data = RNASSDataGenerator('/data2/darren/experiment/ufold/data/', 'bpRNA_TS0_ori.cPickle')
-    #test_data = RNASSDataGenerator('/data2/darren/experiment/ufold/data/', 'bpRNA_TR0_leavefortest1000.cPickle')
-    #test_data = RNASSDataGenerator('/data2/darren/experiment/ufold/data/', 'bpRNA_TR0_andsim_mutate_extract_train.cPickle')
+        
     seq_len = test_data.data_y.shape[-2]
     nums= test_data.data_y.shape[1]
     print(nums)
