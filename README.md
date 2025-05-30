@@ -96,7 +96,27 @@ python process_newdataset.py your_own_directory_containing_bpseq_files
 ```
 After that you will get a pickle file format, which is compatible with our model. Then put the data into data folder
 
+##### Evaluate the performance
+
+Run：
+```python
+python ufold_long_test.py --test_files your_test_pickle_name
+## For the dataset with RNA lengths ranging from 600 to 1800 bp.
+```
+Or:
+```python
+python ufold_all_test.py --test_files your_test_pickle_name
+## For the dataset with RNA lengths ranging from 0 to 1800 bp.
+```
+Other operations are similar to the above.
+
 ### Train models based on your own datasets
+
+#### Data generator
+
+Refer to the operations in the above-mentioned data-generator to generate the pickle files for training and testing.
+
+#### Train
 
 ## Contribute
 We love your input! We want to make contributing to UFold as easy and transparent as possible. Please see our [Contributing Guide]() to get started. Thank you to all our contributors!
