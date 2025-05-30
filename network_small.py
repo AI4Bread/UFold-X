@@ -411,7 +411,7 @@ class VSSMEncoder(nn.Module):
         return x_ret
 
 
-class SwinUMamba(nn.Module):
+class UFoldXlong(nn.Module):
     def __init__(
         self,
         in_chans=17,
