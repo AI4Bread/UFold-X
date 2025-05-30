@@ -69,6 +69,13 @@ After running the above command, you will get the **output ct file, bpseq file, 
 
 ### Evaluate UFold-X
 
+#### Verify the performance of UFold-X on long sequences
+Run:
+```python
+python ufold_long_test.py
+```
+This line of code calls the UFold-X model that has been trained on the long sequence training set. The default test set is **RNAstralign-1800** (since this test set is large, it takes about **2 hours** to complete the test)
+
 ### Train models based on your own datasets
 
 ## Contribute
