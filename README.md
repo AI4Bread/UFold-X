@@ -10,6 +10,29 @@ RNA secondary structure is essential for understanding the functional roles of n
 ## Prerequisites
 
 ## Installation 
+Clone the repository.
+
+```
+
+```
+
+Navigate to the root of this repo and setup the conda environment.
+
+### !!!Noted: 
+
+### 1. Please change prefix path into your own path in the last line of UFold-X.yml file.
+
+### 2. Please match your python version ,cuda version and torch version with the package.
+
+```
+conda env create -f UFold-X.yml
+```
+
+Activate conda environment.
+
+```
+conda activate UFold-X
+```
 
 ## Pre-trained models 
 
@@ -18,11 +41,11 @@ RNA secondary structure is essential for understanding the functional roles of n
 ### Recommended
 We recommend users use our [UFold-X webserver](http://116.211.143.53:23892/UFold-X), which is user-friendly and easy to use. Everyone could upload or typein your own candidate RNA sequence in our web without further installation, our backend server will calculate and give the prediction result to the user. User can choose to download the predict ct file result as well as visualize them online directly. We provide the following **three** types of pretrained models:
 
-1. A model designed for predicting RNA sequences **ranging from 600 bp to 1800 bp in length** (highly recommended for long sequences). This model is pretrained on the **RNAstralign_1800 dataset**.
+1. A model designed for predicting RNA sequences **ranging from 600 bp to 1800 bp in length** (highly recommended for long sequences). This model is pretrained on the **RNAstralign-1800 dataset**.
 
-2. A model capable of predicting RNA sequences **ranging from 0 bp to 1800 bp** (suitable for **both short and long sequences**). This model is pretrained on the **RNAstralign_all dataset**.
+2. A model capable of predicting RNA sequences **ranging from 0 bp to 1800 bp** (suitable for **both short and long sequences**). This model is pretrained on the **RNAstralign-all dataset**.
 
-3. A model which can predict RNA sequences **ranging from 1800 bp to 5000 bp**, although only ~1800 bp yield valid predictions. This model is pretrained on the **RNAstralign_1800 dataset**.
+3. A model which can predict RNA sequences **ranging from 1800 bp to 5000 bp**, although only ~1800 bp yield valid predictions. This model is pretrained on the **RNAstralign-1800 dataset**.
 
 ### Try UFold-X
 
