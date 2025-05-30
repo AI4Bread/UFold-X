@@ -1,6 +1,8 @@
 # UFold-X
 UFold-X: An Enhanced Dual &amp; Dynamic U-Mamba Model for Long-Range RNA Secondary Structure Prediction
 
+<img src='https://github.com/AI4Bread/UFold-X/blob/main/UFold-X/UFold_logonew1.png' width=300 height=200>
+
 ## Web server
 We have developed a user-friendly web server that supports batch submissions and long-sequence prediction. The server is freely accessible at [UFold-X webserver](http://116.211.143.53:23892/UFold-X).
 
@@ -70,7 +72,10 @@ After running the above command, you will get the **output ct file, bpseq file, 
 ### Train models based on your own datasets
 
 ## Contribute
+We love your input! We want to make contributing to UFold as easy and transparent as possible. Please see our [Contributing Guide]() to get started. Thank you to all our contributors!
 
 ## Citation
+If you use our tool, please cite our work: 
 
+UFold-X: An Enhanced Dual & Dynamic U-Mamba Model for Long-Range RNA Secondary Structure Prediction
 
