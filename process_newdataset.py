@@ -107,7 +107,7 @@ if __name__=='__main__':
             ##cut all to 1800 length
             #pdb.set_trace()
             #print index
-            ######change the length here to support longer sequences######
+            ######Readers can change the length here to support longer sequences######
             one_hot_matrix_1800 = np.zeros((1800,4))
             one_hot_matrix_1800[:seq_len,] = one_hot_matrix
             ss_label_1800 = np.zeros((1800,3),dtype=int)
@@ -139,4 +139,4 @@ if __name__=='__main__':
     #cPickle.dump(all_files_list,open("/data2/darren/experiment/ufold/data/bpRNA_new20201015.cPickle","wb"))
     #cPickle.dump(all_files_list,open("/data2/darren/experiment/ufold/data/pdb_from_yx_test.cPickle","wb"))
     #cPickle.dump(all_files_list,open("/data2/darren/experiment/ufold/upload_github/datanew/TS0.cPickle","wb"))
-    cPickle.dump(all_files_list,open("/home/jcli/UFold/data/TS0.cPickle","wb"))
+    cPickle.dump(all_files_list,open("/home/jcli/UFold/data/newdataset.cPickle","wb"))
