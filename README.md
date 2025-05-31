@@ -117,6 +117,32 @@ Other operations are similar to the above.
 Refer to the operations in the above-mentioned data-generator to generate the pickle files for training and testing.
 
 #### Train
+Run:
+```python
+python ufold_long_train.py
+## For the dataset with RNA lengths ranging from 600 to 1800 bp.
+```
+Or:
+```python
+python ufold_all_train.py
+## For the dataset with RNA lengths ranging from 0 to 1800 bp.
+```
+Replace the XXX line of the train file with your own training set. You will find your training data (.pt) for each cycle  in the models folder.
+
+#### Evaluate
+
+The testing process can refer to the above *Evaluate UFold-X*. It should be noted that you need to replace the model with the .pt file trained by yourself on line XXX of the code.
+
+**!Note：**
+
+**Please ensure that the files you run for training and testing are consistent. For example, you run the following file for training:**
+```python
+python ufold_long_train.py
+```
+**So, please run the corresponding file for testing:**
+```python
+python ufold_long_test.py
+```
 
 ## Contribute
 We love your input! We want to make contributing to UFold as easy and transparent as possible. Please see our [Contributing Guide]() to get started. Thank you to all our contributors!
