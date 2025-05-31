@@ -127,7 +127,7 @@ Or:
 python ufold_all_train.py
 ## For the dataset with RNA lengths ranging from 0 to 1800 bp.
 ```
-Replace the **160** line of the train file with your own training set. You will find your training data (.pt) for each cycle  in the models folder.
+Replace the **160/166** line of the train file with your own training set. You will find your training data (.pt) for each cycle  in the models folder.
 
 #### Evaluate
 
