@@ -125,7 +125,7 @@ def train(contact_net,train_merge_generator,epoches_first,args):
             # torch.save(contact_net.state_dict(), model_path)
             #torch.save(contact_net.state_dict(), model_path + f'unet_bpTR0_addsimmutate_addmoresimilar_finetune{epoch}.pt')
         if epoch > -1:
-            torch.save(contact_net.state_dict(),  f'models/UFold_X_all_train_{epoch}.pt')
+            torch.save(contact_net.state_dict(),  f'models/UFoldX_all_train_{epoch}.pt')
 
 def main():
     #torch.cuda.device_count()
