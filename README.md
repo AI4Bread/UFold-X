@@ -127,11 +127,11 @@ Or:
 python ufold_all_train.py
 ## For the dataset with RNA lengths ranging from 0 to 1800 bp.
 ```
-Replace the XXX line of the train file with your own training set. You will find your training data (.pt) for each cycle  in the models folder.
+Replace the **160** line of the train file with your own training set. You will find your training data (.pt) for each cycle  in the models folder.
 
 #### Evaluate
 
-The testing process can refer to the above *Evaluate UFold-X*. It should be noted that you need to replace the model with the .pt file trained by yourself on line XXX of the code.
+The testing process can refer to the above *Evaluate UFold-X*. It should be noted that you need to replace the model with the .pt file trained by yourself on line **254/265** of the code.
 
 **!Note：**
 
