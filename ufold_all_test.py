@@ -251,7 +251,7 @@ def main():
     MODEL_SAVED = 'models/UFold-X_total_train_32.pt'
     '''
     if test_file not in ['TS1','TS2','TS3']:
-        MODEL_SAVED = 'models/side_UNetMamba_total_train_32.pt'
+        MODEL_SAVED = 'models/UFold-X_total_train_32.pt'
         
         #MODEL_SAVED = 'models/ufold_train.pt'
     else:
