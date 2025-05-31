@@ -9,7 +9,6 @@ from torch.utils import data
 from side_Network_for_UFold_X import U_Net_for_mamba as UNet
 from side_Network_for_UFold_X import VSSMBranch as VSSMBranch  
 from side_Network_for_UFold_X import UFoldXall as UFoldXall
-from archs import UNext
 
 from ufold.utils import *
 from ufold.config import process_config
