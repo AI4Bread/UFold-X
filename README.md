@@ -145,7 +145,7 @@ python ufold_long_test.py
 ```
 
 ## Contribute
-We love your input! We want to make contributing to UFold as easy and transparent as possible. Please see our [Contributing Guide]() to get started. Thank you to all our contributors!
+We love your input! We want to make contributing to UFold-X as easy and transparent as possible. Please see our [Contributing Guide]() to get started. Thank you to all our contributors!
 
 ## Citation
 If you use our tool, please cite our work: 
