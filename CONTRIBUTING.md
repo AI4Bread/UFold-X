@@ -24,7 +24,7 @@ Select `requirements.txt` to update by clicking on it in GitHub.
                        
 ### 2. Click 'Edit this file'
 
-Button is in top-right corner.
+Click 'Edit this file'.
 
 <p align="center"><img width="800" alt="PR_step2" 
                        src="https://github.com/lee01210/contributing/blob/main/git2_f.png"></p>
@@ -38,7 +38,7 @@ Change `addict` version from `2.4.0` to `2.3.0`.
 
 ### 4. Preview Changes and Submit PR
 
-Click on the **Preview changes** tab to verify your updates. At the bottom of the screen select 'Create a **new branch**
+Click on the **Preview changes** tab to verify your updates. Select 'Create a **new branch**
 for this commit', assign your branch a descriptive name such as `fix/addict-version` and click the green **Propose
 changes** button. All done, your PR is now submitted to UFold-X for review and approval 😃!
 
