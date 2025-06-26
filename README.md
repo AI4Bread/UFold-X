@@ -134,6 +134,11 @@ python ufold_all_train.py
 ```
 Replace the **160/166** line of the train file with your own training set. You will find your training data (.pt) for each cycle  in the models folder.
 
+During the training process, please ensure that your GPU memory is sufficient (the GPU memory usage for different models is approximately 20G-40G), otherwise you may see an output similar to this:
+```python
+This fails..sel lens: torch.Size([1, 17, 1504, 1504])
+```
+
 #### Evaluate
 
 The testing process can refer to the above *Evaluate UFold-X*. It should be noted that you need to replace the model with the .pt file trained by yourself on line **254/265** of the code.
