@@ -35,6 +35,11 @@ Activate conda environment.
 ```
 conda activate UFold-X
 ```
+Mamba-ssm module is also necessary. It is recommended to download the whl file from the official website first, and then install it using pip in the activated environment, just like this：
+```python
+pip install mamba_ssm-2.2.4+cu12torch2.3cxx11abiFALSE-cp312-cp312-linux_x86_64.whl
+```
+### Please ensure that your mamba-ssm version matches your cuda, python and torch versions！
 
 ## Pre-trained models 
 Pre-trained models are deposited in our [drive](https://drive.google.com/drive/folders/1cqapZOsJmlrVYiKbKADnDzilU7eZML27?usp=drive_link). Please download them and put them into models folder.
