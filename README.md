@@ -46,7 +46,7 @@ Pre-trained models are deposited in our [drive](https://drive.google.com/drive/f
 
 ## Usage
 
-### Recommended
+### Recommended :+1:
 We recommend users use our [UFold-X webserver](http://116.211.143.53:23892/UFold-X), which is user-friendly and easy to use. Everyone could upload or typein your own candidate RNA sequence in our web without further installation, our backend server will calculate and give the prediction result to the user. User can choose to download the predict ct file result as well as visualize them online directly. We provide the following **three** types of pretrained models:
 
 1. A model designed for predicting RNA sequences **ranging from 600 bp to 1800 bp in length** (highly recommended for long sequences). This model is pretrained on the **RNAstralign-1800 dataset**.
