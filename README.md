@@ -55,6 +55,10 @@ We recommend users use our [UFold-X webserver](http://116.211.143.53:23892/UFold
 
 3. A model which can predict RNA sequences **ranging from 1800 bp to 5000 bp**, although only ~1800 bp yield valid predictions. This model is pretrained on the **RNAstralign-1800 dataset**.
 
+To ensure superior predictive performance, models with **narrower prediction intervals** are preferentially recommended when feasible. 
+
+Models trained on other datasets (**BGSU/Rfam**) have been made available in our [drive](https://drive.google.com/drive/folders/1cqapZOsJmlrVYiKbKADnDzilU7eZML27?usp=drive_link). 
+
 ### Try UFold-X
 
 If you want to try UFold-X on your own server, please run:
@@ -79,7 +83,7 @@ Run:
 ```python
 python ufold_long_test.py
 ```
-This line of code calls the UFold-X model that has been pre-trained on the long sequence training set. The default test set is **RNAstralign-1800** (since this test set is large, it takes about **2 hours** to complete the test)
+This line of code calls the UFold-X model that has been pre-trained on the long sequence training set (**RNAstralign-1800** training set). The default test set is **RNAstralign-1800** (since this test set is large, it takes about **2 hours** to complete the test)
 
 You can also add optional parameters **-nc True** which indicates support for predicting non-canonical pairs, and default is False. The predicted results will be placed in the **test_outputs folder** in the **bpseq file format**, and the command line window will present the **F1, Precision and Recall** metrics of the test results.
 
