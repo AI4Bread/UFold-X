@@ -784,7 +784,6 @@ class UFoldXall(nn.Module):
 
         d4 = self.alpha * d4_unet + (1 - self.alpha) * d4_vssm
         
-
         d3_vssm = self.vssm.decoder3(d4, x2)
 
         d3_unet = self.unet.Up_conv3(torch.cat((x2, self.unet.Up3(d4)), dim=1))
