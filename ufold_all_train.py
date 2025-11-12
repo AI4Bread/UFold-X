@@ -66,8 +66,7 @@ def train(contact_net,train_merge_generator,epoches_first,args):
         raise NotImplementedError
 
 
-    
-    
+
     # test_script()
     #t1 = subprocess.getstatusoutput('awk \'{if($1 ~ /^>/)print}\' /data2/darren/experiment/ufold/data/rnastralign_all/rnastralign_train_no_redundant.seq.cdhit')
     #all_cdhit_names = t1[1].split('\n')
@@ -86,19 +85,14 @@ def train(contact_net,train_merge_generator,epoches_first,args):
             contacts_batch = torch.Tensor(contacts.float()).to(device)
             seq_embedding_batch = torch.Tensor(seq_embeddings.float()).to(device)
 
-            pred_contacts = contact_net(seq_embedding_batch)
-            #print(seq_embedding_batch.shape)
-            #print(contacts_batch.shape)
-            '''
+            #pred_contacts = contact_net(seq_embedding_batch)          
             try:
                 pred_contacts = contact_net(seq_embedding_batch)
-                #print(seq_embeddings.shape)
             except:
                 print('This fails..sel lens:',seq_embeddings.shape)
-                pdb.set_trace()
+                #pdb.set_trace()
                 continue
-            '''
-            #pred_contacts = contact_net(seq_embedding_batch,seq_embedding_batch_1)
+            
             pred_contacts = pred_contacts.squeeze(1)##
             contact_masks = torch.zeros_like(pred_contacts)
             contact_masks[:, :seq_lens, :seq_lens] = 1
@@ -111,7 +105,6 @@ def train(contact_net,train_merge_generator,epoches_first,args):
             loss_u.backward()
             u_optimizer.step()
             steps_done=steps_done+1
-        #pdb.set_trace()
         print('Training log: epoch: {}, step: {}, loss: {}'.format(
                     epoch, steps_done-1, loss_u))
         
@@ -120,12 +113,8 @@ def train(contact_net,train_merge_generator,epoches_first,args):
         elif args.scheduler == 'ReduceLROnPlateau':
             # scheduler.step(val_log['loss'])
             scheduler.step()
-        #pdb.set_trace()
-            # model_eval_all_test()
-            # torch.save(contact_net.state_dict(), model_path)
-            #torch.save(contact_net.state_dict(), model_path + f'unet_bpTR0_addsimmutate_addmoresimilar_finetune{epoch}.pt')
         if epoch > -1:
-            torch.save(contact_net.state_dict(),  f'models/UFoldX_all_train_{epoch}.pt')
+            torch.save(contact_net.state_dict(),  f'models/UFold-X_all_train_{epoch}.pt')
 
 def main():
     #torch.cuda.device_count()
@@ -139,11 +128,7 @@ def main():
     print("#####Stage 1#####")
     print('Here is the configuration of this run: ')
     print(config)
-    
-    #pdb.set_trace()
-    
     os.environ["CUDA_VISIBLE_DEVICES"]= config.gpu
-    
     d = config.u_net_d
     ##BATCH_SIZE = config.batch_size_stage_1
     BATCH_SIZE = 1
@@ -151,12 +136,10 @@ def main():
     LOAD_MODEL = config.LOAD_MODEL
     data_type = config.data_type
     model_type = config.model_type
-    #model_path = './models_ckpt/'.format(model_type, data_type,d)
-    #model_path = './models_ckpt/final_model/unet_train_on_RNAlign_99.pt'
     epoches_first = config.epoches_first
 
     ## train_files = ['ArchiveII'] #args.train_files
-    ##train_files = ['train_1800']
+    ## train_files = ['train_1800']
     train_files = ['train_1800','ArchiveII']
     
     # if gpu is to be used
@@ -178,6 +161,8 @@ def main():
             ##train_data_list.append(RNASSDataGenerator('data/',file_item+'.cPickle'))
             train_data_list.append(RNASSDataGenerator('data/',file_item+'.pickle'))  ##train_file_format
     print('Data Loading Done!!!')
+    
+    #Merging the dataset
     if len(train_files) == 2:
         print(train_data_list[0].data_x.shape)
         print(train_data_list[1].data_x.shape)
@@ -199,9 +184,7 @@ def main():
         print("Shape of train_data_list[1].x:", train_data_list[1].data_x.shape)
         print("Shape of train_data_list[0].y:", train_data_list[0].data_y.shape)
         print("Shape of train_data_list[1].y:", train_data_list[1].data_y.shape)
-    #train_data = RNASSDataGenerator('data/{}/'.format(data_type), 'train.pickle', False)
     pdb.set_trace()
-    
     # using the pytorch interface to parallel the data generation and model training
     params = {'batch_size': BATCH_SIZE,
               'shuffle': True,
@@ -221,14 +204,10 @@ def main():
     
     train(contact_net,train_merge_generator,epoches_first,args)
 
-        
-
-#model_eval_all_test()
 if __name__ == '__main__':
     """
     See module-level docstring for a description of the script.
     """
     RNA_SS_data = collections.namedtuple('RNA_SS_data','seq ss_label length name pairs')
     main()
-#torch.save(contact_net.module.state_dict(), model_path + 'unet_final.pt')
-# sys.exit()
+#torch.save(con
