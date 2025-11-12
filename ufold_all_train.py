@@ -210,4 +210,5 @@ if __name__ == '__main__':
     """
     RNA_SS_data = collections.namedtuple('RNA_SS_data','seq ss_label length name pairs')
     main()
-#torch.save(con
+#torch.save(contact_net.module.state_dict(), model_path + 'unet_final.pt')
+# sys.exit()
