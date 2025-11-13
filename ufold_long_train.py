@@ -148,8 +148,7 @@ def main():
     print('Data Loading Done!!!')
     #train_data = RNASSDataGenerator('data/{}/'.format(data_type), 'train.pickle', False)
     pdb.set_trace()
-    
-    # using the pytorch interface to parallel the data generation and model training
+
     params = {'batch_size': BATCH_SIZE,
               'shuffle': True,
               'num_workers': 6,
@@ -165,9 +164,6 @@ def main():
     train(contact_net,train_merge_generator,epoches_first,args)
 
 if __name__ == '__main__':
-    """
-    See module-level docstring for a description of the script.
-    """
     RNA_SS_data = collections.namedtuple('RNA_SS_data','seq ss_label length name pairs')
     main()
 #torch.save(contact_net.module.state_dict(), model_path + 'unet_final.pt')
