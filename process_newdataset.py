@@ -62,81 +62,30 @@ if __name__=='__main__':
             pair_dict_all_list = [[int(item_tmp)-1,int(t2[1].split('\n')[index_tmp])-1] for index_tmp,item_tmp in enumerate(t1[1].split('\n')) if int(t2[1].split('\n')[index_tmp]) != 0]
         else:
             pair_dict_all_list = []
-        #pdb.set_trace()
-        #pdb.set_trace()
-        #print 'Before clean len: %d'%(len(pair_dict_all_list))
-        #pair_dict_all_list = clean_pair(pair_dict_all_list,seq)
-        #print 'After clean len: %d'%(len(pair_dict_all_list))
         seq_name = item_file
         seq_len = len(seq)
         pair_dict_all = dict([item for item in pair_dict_all_list if item[0]<item[1]])
-        '''
-        if t1[0] == 0 and t1[1] != '':
-            all_paris_list = [[item.split(' ')[0].split('..'),item.split(' ')[1].split('..')] for item in t1[1].split('\n')]
-            pair_dict_all = {}
-            for item in all_paris_list:
-                pair_dict_tmp = dict(zip(list(range(int(item[0][0])-1,int(item[0][1]))),list(range(int(item[1][0])-1,int(item[1][1])))))
-                pair_dict_all.update(pair_dict_tmp)
-        elif t1[0] == 0 and t1[1] == '':
-            pair_dict_all = {}
-        
-        pair_dict_all_list = [[item,pair_dict_all[item]] for item in pair_dict_all.keys()]
-        pair_dict_all_list = pair_dict_all_list + [[pair_dict_all[item],item] for item in pair_dict_all.keys()]
-        
-        t2 = subprocess.getstatusoutput('awk \'{if($1 ~/^#Name/)print $2}\' bpRNA_dataset/TS0/'+item_file)
-        if t2[0] == 0:
-            seq_name = t2[1]
-        #t3 = subprocess.getstatusoutput('awk \'{if($1 ~/^#Length/)print $2}\' bpRNA_dataset/TS0/'+item_file)
-        #pdb.set_trace()
-        t3 = subprocess.getstatusoutput('awk \'{if($1 ~/^#Length/ && match($NF, /[0-9][0-9]*/))print substr($NF,RSTART, RLENGTH)}\' bpRNA_dataset/TS0/'+item_file)
-        if t3[0] == 0:
-            seq_len = int(t3[1])
-        '''
+
         if index%1000==0:
             print('current processing %d/%d'%(index+1,len(all_files)))
-        #if seq_len > 0 and seq_len <= 600:
+
         if seq_len > 0:
             ss_label = np.zeros((seq_len,3),dtype=int)
-            #ss_label[pair_dict_all.keys(),] = [0,1,0]
-            #ss_label[pair_dict_all.values(),] = [0,0,1]
             ss_label[[*pair_dict_all.keys()],] = [0,1,0]
             ss_label[[*pair_dict_all.values()],] = [0,0,1]
             ss_label[np.where(np.sum(ss_label,axis=1) <= 0)[0],] = [1,0,0]
-            ##sample_tmp = RNA_SS_data(seq=one_hot_matrix,ss_label=ss_label,length=seq_len,name=seq_name,pairs=pair_dict_all_list)
-            ##all_files_list.append(sample_tmp)
-            ##cut all to 1800 length
-            #pdb.set_trace()
-            #print index
+
             ######Readers can change the length here to support longer sequences######
+            ##Default =1800 nt
             one_hot_matrix_1800 = np.zeros((1800,4))
             one_hot_matrix_1800[:seq_len,] = one_hot_matrix
             ss_label_1800 = np.zeros((1800,3),dtype=int)
             ss_label_1800[:seq_len,] = ss_label
             ss_label_1800[np.where(np.sum(ss_label_1800,axis=1) <= 0)[0],] = [1,0,0]
             #pdb.set_trace()
-    ##      end cut sequnce
+
             sample_tmp = RNA_SS_data(seq=one_hot_matrix_1800,ss_label=ss_label_1800,length=seq_len,name=seq_name,pairs=pair_dict_all_list)
             all_files_list.append(sample_tmp)
-    '''
-    ##      cut all to 600 length
-            #pdb.set_trace()
-            #print index
-            one_hot_matrix_600 = np.zeros((600,4))
-            one_hot_matrix_600[:seq_len,] = one_hot_matrix
-            ss_label_600 = np.zeros((600,3),dtype=int)
-            ss_label_600[:seq_len,] = ss_label
-            ss_label_600[np.where(np.sum(ss_label_600,axis=1) <= 0)[0],] = [1,0,0]
-            #pdb.set_trace()
-    ##      end cut sequnce
-    '''
-    
-        #pdb.set_trace()
         
     print(len(all_files_list))
-    #pdb_file.close()
-    #pdb.set_trace()
-    #cPickle.dump(all_files_list,open("/data2/darren/experiment/ufold/data/bpRNA_TrainSetA_128.cPickle","wb"))
-    #cPickle.dump(all_files_list,open("/data2/darren/experiment/ufold/data/bpRNA_new20201015.cPickle","wb"))
-    #cPickle.dump(all_files_list,open("/data2/darren/experiment/ufold/data/pdb_from_yx_test.cPickle","wb"))
-    #cPickle.dump(all_files_list,open("/data2/darren/experiment/ufold/upload_github/datanew/TS0.cPickle","wb"))
-    cPickle.dump(all_files_list,open("/home/jcli/UFold/data/newdataset.cPickle","wb"))
+    cPickle.dump(all_files_list,open("data/newdataset.cPickle","wb"))
