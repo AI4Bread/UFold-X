@@ -84,7 +84,7 @@ def contact_map_to_bpseq(contact_map, seq_ori, seq_name, seq_lens):
                     base_pairs[j] = i + 1
         for i in range(seq_lens.item()):
             bpseq_file.write(f"{i + 1} {seq_bases[i]} {base_pairs[i]}\n")
-    #print(f"bpseq-file for {seq_name_clean} saved to {bpseq_filename}")
+    print(f"bpseq-file for {seq_name_clean} saved to {bpseq_filename}")
 
 ## convert to dot-bracket file
 def contact_map_to_dot_bracket(contact_map, seq_ori, seq_name, seq_lens,predict_number):
@@ -109,7 +109,7 @@ def contact_map_to_dot_bracket(contact_map, seq_ori, seq_name, seq_lens,predict_
         
 def model_eval_all_test(contact_net,test_generator):
     ##device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda:2" if torch.cuda.is_available() else "cpu")
     #device = torch.device(":1" if torch..is_available() else "cpu")
     contact_net.train()
     result_no_train = list()
@@ -135,8 +135,8 @@ def model_eval_all_test(contact_net,test_generator):
         
         batch_n += 1
         
-        #if batch_n > 10:
-        #    break
+        if batch_n > 10:
+            break
 
         contacts_batch = torch.Tensor(contacts.float()).to(device)
         seq_embedding_batch = torch.Tensor(seq_embeddings.float()).to(device)
@@ -208,17 +208,14 @@ def main():
     OUT_STEP = config.OUT_STEP
     LOAD_MODEL = config.LOAD_MODEL
     
-    
-    
     # if gpu is to be used
     ##device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda:2" if torch.cuda.is_available() else "cpu")
     #device = torch.device(":2" if torch..is_available() else "cpu")
     seed_torch()
     
     print('Loading test file: ',test_file)
-    if test_file == 'RNAStralign' or test_file == 'ArchiveII':
-
+    if test_file == 'RNAStralign-1800':
         test_data = RNASSDataGenerator('data/', 'test_no_redundant_1800.pickle')
 
     else:
@@ -242,11 +239,9 @@ def main():
 
     ##contact_net = FCNNet(img_ch=17)
     contact_net = FCNNet()
-    #contact_net = UNext(input_channels=17)
-    #pdb.set_trace()
-    
+
     print('==========Start Loading==========')
-    contact_net.load_state_dict(torch.load(MODEL_SAVED,map_location='cuda:0'))
+    contact_net.load_state_dict(torch.load(MODEL_SAVED,map_location='cuda:2'))
     print('==========Finish Loading==========')
     
     contact_net.to(device)
@@ -262,10 +257,5 @@ print(f"End Time: {time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(end_time))}
 
 elapsed_time = end_time - start_time  
 print(f"Duration: {elapsed_time:.2f} s")
-
-
-
-
-
 
 
