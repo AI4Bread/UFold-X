@@ -55,79 +55,11 @@ class up_conv(nn.Module):
         return x
 
 
-class U_Net(nn.Module):
-    def __init__(self,img_ch=3,output_ch=1):
-        super(U_Net,self).__init__()
-        
-        self.Maxpool = nn.MaxPool2d(kernel_size=2,stride=2)
-        
-        self.Conv1 = conv_block(ch_in=img_ch,ch_out=int(32*CH_FOLD2))
-        self.Conv2 = conv_block(ch_in=int(32*CH_FOLD2),ch_out=int(64*CH_FOLD2))
-        self.Conv3 = conv_block(ch_in=int(64*CH_FOLD2),ch_out=int(128*CH_FOLD2))
-        self.Conv4 = conv_block(ch_in=int(128*CH_FOLD2),ch_out=int(256*CH_FOLD2))
-        self.Conv5 = conv_block(ch_in=int(256*CH_FOLD2),ch_out=int(512*CH_FOLD2))
-
-        self.Up5 = up_conv(ch_in=int(512*CH_FOLD2),ch_out=int(256*CH_FOLD2))
-        self.Up_conv5 = conv_block(ch_in=int(512*CH_FOLD2), ch_out=int(256*CH_FOLD2))
-
-        self.Up4 = up_conv(ch_in=int(256*CH_FOLD2),ch_out=int(128*CH_FOLD2))
-        self.Up_conv4 = conv_block(ch_in=int(256*CH_FOLD2), ch_out=int(128*CH_FOLD2))
-        
-        self.Up3 = up_conv(ch_in=int(128*CH_FOLD2),ch_out=int(64*CH_FOLD2))
-        self.Up_conv3 = conv_block(ch_in=int(128*CH_FOLD2), ch_out=int(64*CH_FOLD2))
-        
-        self.Up2 = up_conv(ch_in=int(64*CH_FOLD2),ch_out=int(32*CH_FOLD2))
-        self.Up_conv2 = conv_block(ch_in=int(64*CH_FOLD2), ch_out=int(32*CH_FOLD2))
-
-        self.Conv_1x1 = nn.Conv2d(int(32*CH_FOLD2),output_ch,kernel_size=1,stride=1,padding=0)
-
-
-    def forward(self,x):
-        # encoding path
-        x1 = self.Conv1(x)
-
-        x2 = self.Maxpool(x1)
-        x2 = self.Conv2(x2)
-        
-        x3 = self.Maxpool(x2)
-        x3 = self.Conv3(x3)
-
-        x4 = self.Maxpool(x3)
-        x4 = self.Conv4(x4)
-
-        x5 = self.Maxpool(x4)
-        x5 = self.Conv5(x5)
-
-        # decoding + concat path
-        d5 = self.Up5(x5)
-        d5 = torch.cat((x4,d5),dim=1)
-        
-        d5 = self.Up_conv5(d5)
-        
-        d4 = self.Up4(d5)
-        d4 = torch.cat((x3,d4),dim=1)
-        d4 = self.Up_conv4(d4)
-
-        d3 = self.Up3(d4)
-        d3 = torch.cat((x2,d3),dim=1)
-        d3 = self.Up_conv3(d3)
-
-        d2 = self.Up2(d3)
-        d2 = torch.cat((x1,d2),dim=1)
-        d2 = self.Up_conv2(d2)
-
-        d1 = self.Conv_1x1(d2)
-        d1 = d1.squeeze(1)
-
-        return torch.transpose(d1, -1, -2) * d1
-
 class U_Net_for_mamba(nn.Module):
     def __init__(self,img_ch=3,output_ch=1):
         super(U_Net_for_mamba,self).__init__()
         
-        ##self.Maxpool = nn.MaxPool2d(kernel_size=2,stride=2)  
         self.Maxpool = nn.MaxPool2d(kernel_size=2,stride=2)  
-        ##self.Upsample = nn.Upsample(scale_factor=2)
         self.Conv1 = conv_block(ch_in=img_ch,ch_out=int(32*CH_FOLD2))
         self.Conv2 = conv_block(ch_in=int(32*CH_FOLD2),ch_out=int(64*CH_FOLD2))
         self.Conv3 = conv_block(ch_in=int(64*CH_FOLD2),ch_out=int(128*CH_FOLD2))
@@ -733,7 +665,7 @@ class UFoldXall(nn.Module):
     def __init__(self, unet, vssm, alpha):
         super(UFoldXall, self).__init__()
         self.unet = unet
-        self.vssm = vssm
+        self.swin_mamba = vssm
         self.alpha = alpha
 
     def forward(self, x):
@@ -743,30 +675,30 @@ class UFoldXall(nn.Module):
         else:
             alpha=1
         self.alpha=alpha
-        x1_in = self.vssm.stem(x)
+        x1_in = self.swin_mamba.stem(x)
         x1_unet = self.unet.Conv1(x)
-        x1_vssm = self.vssm.encoder1(x)
+        x1_vssm = self.swin_mamba.encoder1(x)
         x1 = self.alpha * x1_unet + (1 - self.alpha) * x1_vssm
         
         x2_unet = self.unet.Conv2(self.unet.Maxpool(x1))
-        x2_vssm = self.vssm.encoder2(self.vssm.vssm_encoder(x1_in)[0])
+        x2_vssm = self.swin_mamba.encoder2(self.swin_mamba.vssm_encoder(x1_in)[0])
         x2 = self.alpha * x2_unet + (1 - self.alpha) * x2_vssm
         
         x3_unet = self.unet.Conv3(self.unet.Maxpool(x2))
 
-        x3_vssm = self.vssm.encoder3(self.vssm.vssm_encoder(x1_in)[1])
+        x3_vssm = self.swin_mamba.encoder3(self.swin_mamba.vssm_encoder(x1_in)[1])
 
         x3 = self.alpha * x3_unet + (1 - self.alpha) * x3_vssm
 
         x4_unet = self.unet.Conv4(self.unet.Maxpool(x3))
 
-        x4_vssm = self.vssm.encoder4(self.vssm.vssm_encoder(x1_in)[2])
+        x4_vssm = self.swin_mamba.encoder4(self.swin_mamba.vssm_encoder(x1_in)[2])
 
         x4 = self.alpha * x4_unet + (1 - self.alpha) * x4_vssm
 
         x5_unet = self.unet.Conv5(self.unet.Maxpool(x4))
 
-        x5_vssm = self.vssm.encoder5(self.vssm.vssm_encoder(x1_in)[3])
+        x5_vssm = self.swin_mamba.encoder5(self.swin_mamba.vssm_encoder(x1_in)[3])
 
         x5 = self.alpha * x5_unet + (1 - self.alpha) * x5_vssm
 
@@ -774,17 +706,17 @@ class UFoldXall(nn.Module):
 
         d5_unet = self.unet.Up_conv5(torch.cat((x4, self.unet.Up5(x5)), dim=1))
 
-        d5_vssm = self.vssm.decoder5(x5, x4)
+        d5_vssm = self.swin_mamba.decoder5(x5, x4)
 
         d5 = self.alpha * d5_unet + (1 - self.alpha) * d5_vssm
 
         d4_unet = self.unet.Up_conv4(torch.cat((x3, self.unet.Up4(d5)), dim=1))
 
-        d4_vssm = self.vssm.decoder4(d5, x3)
+        d4_vssm = self.swin_mamba.decoder4(d5, x3)
 
         d4 = self.alpha * d4_unet + (1 - self.alpha) * d4_vssm
         
-        d3_vssm = self.vssm.decoder3(d4, x2)
+        d3_vssm = self.swin_mamba.decoder3(d4, x2)
 
         d3_unet = self.unet.Up_conv3(torch.cat((x2, self.unet.Up3(d4)), dim=1))
 
@@ -792,13 +724,13 @@ class UFoldXall(nn.Module):
 
         d2_unet = self.unet.Up_conv2(torch.cat((x1, self.unet.Up2(d3)), dim=1))
 
-        d2_vssm = self.vssm.decoder2(d3, x1)
+        d2_vssm = self.swin_mamba.decoder2(d3, x1)
 
         d2 = self.alpha * d2_unet + (1 - self.alpha) * d2_vssm
 
         d1_unet = self.unet.Conv_1x1(d2)
-        d1_vssm = self.vssm.decoder1(d2)
-        out = self.vssm.out_layers[0](d1_vssm)
+        d1_vssm = self.swin_mamba.decoder1(d2)
+        out = self.swin_mamba.out_layers[0](d1_vssm)
         d1 = self.alpha * d1_unet + (1 - self.alpha) * out
         return d1
 
