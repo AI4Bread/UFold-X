@@ -38,15 +38,13 @@ def train(contact_net,train_merge_generator,epoches_first,args):
     epoch = 0
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")##
     #
-    #pdb.set_trace()
-    ## select loss
     if args.loss == 'BCEWithLogitsLoss':
         pos_weight = torch.Tensor([300]).to(device)
         criterion = torch.nn.BCEWithLogitsLoss(
                         pos_weight = pos_weight)
     else:
         criterion = losses.__dict__[args.loss]().to(device)
-    ## end loss
+
     
     ## 
     u_optimizer = optim.Adam(contact_net.parameters())
@@ -66,20 +64,12 @@ def train(contact_net,train_merge_generator,epoches_first,args):
         raise NotImplementedError
 
 
-
-    # test_script()
-    #t1 = subprocess.getstatusoutput('awk \'{if($1 ~ /^>/)print}\' /data2/darren/experiment/ufold/data/rnastralign_all/rnastralign_train_no_redundant.seq.cdhit')
-    #all_cdhit_names = t1[1].split('\n')
     steps_done = 0
     print('start training...')
-    # There are three steps of training
-    # step one: train the u net
     epoch_rec = []
     #for epoch in range(epoches_first):
     for epoch in range(100):
         contact_net.train()
-        # num_batches = int(np.ceil(train_data.len / BATCH_SIZE))
-        # for i in range(num_batches):
         #for contacts, seq_embeddings, matrix_reps, seq_lens, seq_ori, seq_name in train_generator:
         for contacts, seq_embeddings, matrix_reps, seq_lens, seq_ori, seq_name in train_merge_generator:
             contacts_batch = torch.Tensor(contacts.float()).to(device)
@@ -147,11 +137,6 @@ def main():
     
     seed_torch()
     
-    # for loading data
-    # loading the rna ss data, the data has been preprocessed
-    # 5s data is just a demo data, which do not have pseudoknot, will generate another data having that
-    
-    #pdb.set_trace()
     train_data_list = []
     for file_item in train_files:
         print('Loading dataset: ',file_item)
@@ -185,7 +170,7 @@ def main():
         print("Shape of train_data_list[0].y:", train_data_list[0].data_y.shape)
         print("Shape of train_data_list[1].y:", train_data_list[1].data_y.shape)
     pdb.set_trace()
-    # using the pytorch interface to parallel the data generation and model training
+
     params = {'batch_size': BATCH_SIZE,
               'shuffle': True,
               'num_workers': 6,
@@ -205,9 +190,6 @@ def main():
     train(contact_net,train_merge_generator,epoches_first,args)
 
 if __name__ == '__main__':
-    """
-    See module-level docstring for a description of the script.
-    """
     RNA_SS_data = collections.namedtuple('RNA_SS_data','seq ss_label length name pairs')
     main()
 #torch.save(contact_net.module.state_dict(), model_path + 'unet_final.pt')
