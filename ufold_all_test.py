@@ -88,7 +88,7 @@ def contact_map_to_bpseq(contact_map, seq_ori, seq_name, seq_lens):
             
 def model_eval_all_test(contact_net,test_generator):
     ##device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
-    device = torch.device("cuda:2" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     #device = torch.device(":1" if torch..is_available() else "cpu")
     contact_net.train()
     result_no_train = list()
@@ -194,7 +194,7 @@ def main():
     
     # if gpu is to be used
     ##device = torch.device("cuda:1" if torch.cuda.is_available() else "cpu")
-    device = torch.device("cuda:2" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     seed_torch()
     
     #test file
@@ -225,7 +225,7 @@ def main():
     contact_net=UFoldXall(unet=unet, vssm=vssm, alpha=alpha)
     print('==========Start Loading==========')
     ##contact_net.load_state_dict(torch.load(MODEL_SAVED,map_location='cuda:1'))
-    contact_net.load_state_dict(torch.load(MODEL_SAVED,map_location='cuda:2'))
+    contact_net.load_state_dict(torch.load(MODEL_SAVED,map_location='cuda:0'))
     print('==========Finish Loading==========')
     contact_net.to(device)
     model_eval_all_test(contact_net,test_generator)
