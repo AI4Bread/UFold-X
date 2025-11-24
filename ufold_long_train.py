@@ -143,8 +143,8 @@ def main():
         if file_item == 'RNAStralign' or file_item == 'ArchiveII':
             train_data_list.append(RNASSDataGenerator('data/','train.pickle'))
         else:
-            train_data_list.append(RNASSDataGenerator('data/',file_item+'.cPickle'))
-            ## train_data_list.append(RNASSDataGenerator('data/',file_item+'.pickle'))  ##train file format
+            ##train_data_list.append(RNASSDataGenerator('data/',file_item+'.cPickle'))
+            train_data_list.append(RNASSDataGenerator('data/',file_item+'.pickle'))  ##train file format
     print('Data Loading Done!!!')
     #train_data = RNASSDataGenerator('data/{}/'.format(data_type), 'train.pickle', False)
     pdb.set_trace()
