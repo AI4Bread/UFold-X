@@ -53,7 +53,7 @@ We recommend users use our [UFold-X webserver](http://210.16.166.49:32966/UFold-
 
 2. A model capable of predicting RNA sequences **ranging from 0 bp to 1800 bp** (suitable for **both short and long sequences**). This model is pretrained on the **RNAstralign-all dataset**.
 
-3. A model which can predict RNA sequences **ranging from 1800 bp to 5000 bp**, although only ~1800 bp yield valid predictions. This model is pretrained on the **RNAstralign-1800 dataset**.
+3. A model which can predict RNA sequences **ranging from 1800 bp to 5000 bp**. This model is pretrained on the **Rfam5000 dataset**.
 
 To ensure superior predictive performance, models with **narrower prediction intervals** are preferentially recommended when feasible. 
 
