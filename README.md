@@ -4,7 +4,7 @@ UFold-X: An Enhanced Dual &amp; Dynamic U-Mamba Model for Long-Range RNA Seconda
 <img src='https://github.com/AI4Bread/UFold-X/blob/main/UFold-X/UFold-X%20icon.png' width=300 height=250>
 
 ## Web server
-We have developed a user-friendly web server that supports batch submissions and long-sequence prediction. The server is freely accessible at [UFold-X webserver](http://210.16.166.49:32966/UFold-X/).
+We have developed a user-friendly web server that supports batch submissions and long-sequence prediction. The server is freely accessible at [UFold-X webserver](http://205.198.91.43:21145/UFold-X/).
 
 ## Introduction
 RNA secondary structure is essential for understanding the functional roles of non-coding RNAs, ribosomal RNAs, and viral genomes. However, accurately predicting secondary structures—particularly for long RNA sequences—remains a major challenge due to the complexity of long-range base-pairing interactions and the limited generalization of existing models trained predominantly on short sequences. In this work, we propose UFold-X, a dual-branch U-Net-based deep learning framework specifically designed for long-range RNA secondary structure prediction. UFold-X integrates a fully convolutional network for local feature extraction and a Mamba-based Visual State Space Module (VSSM) for efficient global dependency modeling. A dynamic gating mechanism adaptively fuses outputs from both branches based on sequence length, enabling robust generalization across varying sequence scales. Comprehensive experiments on benchmark datasets demonstrate that UFold-X achieves state-of-the-art performance, significantly outperforming both traditional thermodynamic models and deep learning baselines, particularly in long-sequence and long-range base-pair prediction tasks. Notably, on the RNAstralign-1800 dataset and the unseen ultra-long RCSB4000 dataset, UFold-X improves F1-score by up to 158\% while maintaining fast inference with an average runtime of 0.08 seconds per sequence, showcasing strong generalization to novel RNA families.
@@ -47,7 +47,7 @@ Pre-trained models are deposited in our [drive](https://drive.google.com/drive/f
 ## Usage
 
 ### Recommended :+1:
-We recommend users use our [UFold-X webserver](http://210.16.166.49:32966/UFold-X/), which is user-friendly and easy to use. Everyone could upload or typein your own candidate RNA sequence in our web without further installation, our backend server will calculate and give the prediction result to the user. User can choose to download the predict ct file result as well as visualize them online directly. We provide the following **three** types of pretrained models:
+We recommend users use our [UFold-X webserver](http://205.198.91.43:21145/UFold-X/), which is user-friendly and easy to use. Everyone could upload or typein your own candidate RNA sequence in our web without further installation, our backend server will calculate and give the prediction result to the user. User can choose to download the predict ct file result as well as visualize them online directly. We provide the following **three** types of pretrained models:
 
 1. A model designed for predicting RNA sequences **ranging from 600 bp to 1800 bp in length** (highly recommended for long sequences). This model is pretrained on the **RNAstralign-1800 dataset**.
 
