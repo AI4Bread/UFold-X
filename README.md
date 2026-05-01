@@ -3,6 +3,9 @@ UFold-X: An Enhanced Dual &amp; Dynamic U-Mamba Model for Long-Range RNA Seconda
 
 <img src='https://github.com/AI4Bread/UFold-X/blob/main/UFold-X/UFold-X%20icon.png' width=300 height=250>
 
+## Latest Updates
+- 🚀 **[2026-05]** We update our [google drive](https://drive.google.com/drive/folders/1cqapZOsJmlrVYiKbKADnDzilU7eZML27?usp=drive_link) with a brand-new model pre-trained on a diverse RNA corpus, which delivers **substantially stronger generalization** than our previous single-dataset version. The training data come from **RNAstralign, bpRNA, and RNAsolo2**, encompassing all sequences **between 600 and 1,800 nt** in length. We run CD-HIT on the raw sequences to filter out any pairs with **> 0.92** identity, then split the deduplicated set into training and testing subsets. The model achieves an F1-score of **~0.73** on the held-out test set, demonstrating robust generalization across varied RNA targets. The complete training and testing datasets are also now available on the [drive](https://drive.google.com/drive/folders/1cqapZOsJmlrVYiKbKADnDzilU7eZML27?usp=drive_link) for direct access and benchmarking.
+
 ## Web server
 We have developed a user-friendly web server that supports batch submissions and long-sequence prediction. The server is freely accessible at [UFold-X webserver](https://ufold-x.cn/UFold-X/).
 
