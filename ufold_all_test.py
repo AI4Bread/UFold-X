@@ -184,7 +184,7 @@ def main():
     config = process_config(config_file)
     #print('Here is the configuration of this run: ')
     #print(config)
-    MODEL_SAVED = 'models/UFold-X_total_train_32.pt'
+    MODEL_SAVED = 'models/UFold-X_total_train_RNAstralign.pt'
 
     # os.environ["_VISIBLE_DEVICES"]= config.gpu
     d = config.u_net_d
@@ -200,7 +200,7 @@ def main():
     #test file
     print('Loading test file: ',test_file)
     if test_file == 'RNAStralign-1800' or test_file == '1800':
-        test_data = RNASSDataGenerator('data/', 'test_no_redundant_1800.pickle')
+        test_data = RNASSDataGenerator('data/', 'RNAstralign_test_1800.pickle')
     elif test_file == '600' or test_file == 'ArchiveII':
         test_data = RNASSDataGenerator('data/', 'ArchiveII.pickle')
     else:
