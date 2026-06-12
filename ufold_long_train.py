@@ -129,7 +129,7 @@ def main():
     model_type = config.model_type
     epoches_first = config.epoches_first
 
-    train_files = ['train_1800']
+    train_files = ['RNAstralign_train_1800']
     
     # if gpu is to be used
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")##
