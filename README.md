@@ -9,7 +9,12 @@ UFold-X: An Enhanced Dual &amp; Dynamic U-Mamba Model for Long-Range RNA Seconda
 - 🚀 **[2026-05]** We update our [google drive](https://drive.google.com/drive/folders/1cqapZOsJmlrVYiKbKADnDzilU7eZML27?usp=drive_link) with a brand-new model pre-trained on a diverse RNA corpus, which delivers **substantially stronger generalization** than our previous single-dataset version. The training data come from **RNAstralign, bpRNA, and RNAsolo2**, encompassing all sequences **between 600 and 1,800 nt** in length. We run CD-HIT on the raw sequences to filter out any pairs with **> 0.92** identity, then split the deduplicated set into training and testing subsets. The model achieves an F1-score of **~0.73** on the held-out test set, demonstrating robust generalization across varied RNA targets. The complete training and testing datasets are also now available on the [drive](https://drive.google.com/drive/folders/1cqapZOsJmlrVYiKbKADnDzilU7eZML27?usp=drive_link) for direct access and benchmarking.
 
 ## Web server
-We have developed a user-friendly web server that supports batch submissions and long-sequence prediction. The server is freely accessible at [UFold-X webserver](https://ufold-x.cn/UFold-X/).
+We have developed a user-friendly web server that supports batch submissions and long-sequence prediction. The UFold-X webserver is freely accessible worldwide through either of the following official URLs:
+
+- https://ufold-x.ai4bread.com/ 
+- https://ufold-x.cn/
+
+Both URLs provide access to the same UFold-X web service. The ufold-x.ai4bread.com URL is used in the UFold-X paper and is aligned with the [AI4Bread](http://ai4bread.com/) laboratory domain.
 
 ## Introduction
 RNA secondary structure is essential for understanding the functional roles of non-coding RNAs, ribosomal RNAs, and viral genomes. However, accurately predicting secondary structures—particularly for long RNA sequences—remains a major challenge due to the complexity of long-range base-pairing interactions and the limited generalization of existing models trained predominantly on short sequences. In this work, we propose UFold-X, a dual-branch U-Net-based deep learning framework specifically designed for long-range RNA secondary structure prediction. UFold-X integrates a fully convolutional network for local feature extraction and a Mamba-based Visual State Space Module (VSSM) for efficient global dependency modeling. A dynamic gating mechanism adaptively fuses outputs from both branches based on sequence length, enabling robust generalization across varying sequence scales. Comprehensive experiments on benchmark datasets demonstrate that UFold-X achieves state-of-the-art performance, significantly outperforming both traditional thermodynamic models and deep learning baselines, particularly in long-sequence and long-range base-pair prediction tasks. Notably, on the RNAstralign-1800 dataset and the unseen ultra-long RCSB4000 dataset, UFold-X improves F1-score by up to 158\% while maintaining fast inference with an average runtime of 0.08 seconds per sequence, showcasing strong generalization to novel RNA families.
@@ -52,7 +57,7 @@ Pre-trained models are deposited in our [drive](https://drive.google.com/drive/f
 ## Usage
 
 ### Recommended :+1:
-We recommend users use our [UFold-X webserver](https://ufold-x.cn/UFold-X/), which is user-friendly and easy to use. Everyone could upload or typein your own candidate RNA sequence in our web without further installation, our backend server will calculate and give the prediction result to the user. User can choose to download the predict ct file result as well as visualize them online directly. We provide the following **three** types of pretrained models:
+We recommend users use our [UFold-X webserver](https://ufold-x.ai4bread.com/), which is user-friendly and easy to use. Everyone could upload or typein your own candidate RNA sequence in our web without further installation, our backend server will calculate and give the prediction result to the user. User can choose to download the predict ct file result as well as visualize them online directly. We provide the following **three** types of pretrained models:
 
 1. A model designed for predicting RNA sequences **ranging from 600 bp to 1800 bp in length** (highly recommended for long sequences). This model is pretrained on the **RNAstralign-1800 dataset**.
 
