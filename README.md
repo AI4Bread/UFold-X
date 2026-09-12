@@ -174,7 +174,25 @@ python ufold_long_test.py
 We love your input! We want to make contributing to UFold-X as easy and transparent as possible. Please see our [Contributing Guide]() to get started. Thank you to all our contributors!
 
 ## Citation
-If you use our tool, please cite our work: 
 
-UFold-X: An Enhanced Dual & Dynamic U-Mamba Model for Long-Range RNA Secondary Structure Prediction
+If you use UFold-X in your research, please cite our work:
 
+> **Fu L, Li J, Wang R, Sun H, Wu D.**  
+> **UFold-X: An Enhanced Dual & Dynamic U-Mamba Model for Long-Range RNA Secondary Structure Prediction.**  
+> *Nucleic Acids Research*, 2026, 54(17): gkag887.  
+> https://doi.org/10.1093/nar/gkag887
+
+### BibTeX
+
+```bibtex
+@article{fu2026ufoldx,
+  title={UFold-X: An Enhanced Dual \& Dynamic U-Mamba Model for Long-Range RNA Secondary Structure Prediction},
+  author={Fu, Laiyi and Li, Jiachun and Wang, Ruiqi and Sun, Hequan and Wu, Danyang},
+  journal={Nucleic Acids Research},
+  volume={54},
+  number={17},
+  pages={gkag887},
+  year={2026},
+  doi={10.1093/nar/gkag887},
+  publisher={Oxford University Press}
+}
